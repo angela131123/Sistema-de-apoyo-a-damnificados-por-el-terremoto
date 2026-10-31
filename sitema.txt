@@ -1,0 +1,18 @@
+sitema de apoyo para damnificados por el terremoto 
+
+Este proyecto consiste en desarrollar un sistema digital que permita gestionar y brindar apoyo a las 
+personas afectadas por un terremoto.
+Su objetivo principal es facilitar el registro de los damnificados, identificar sus necesidades y organizar
+la entrega de ayudas humanitarias como alimentos, agua, ropa, medicamentos y refugio.
+
+El sistema permitirá registrar la información de las personas afectadas, consultar las solicitudes de ayuda,
+controlar los recursos disponibles y llevar un seguimiento de las ayudas entregadas. De esta manera, 
+se busca mejorar la organización, agilizar la atención de las emergencias y garantizar 
+que los recursos lleguen de manera oportuna a quienes más los necesitan.
+
+Objetivo general: Desarrollar una herramienta tecnológica que facilite la administración y distribución 
+de ayudas humanitarias, contribuyendo a una atención más rápida, organizada y eficiente de las personas 
+damnificadas por un terremoto.
+
+Este proyecto es para las materias de programcion IV y Calidad del desarrollo de software
+presentado por Angela Maria Taba Bueno
