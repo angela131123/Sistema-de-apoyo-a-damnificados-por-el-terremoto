@@ -1,4 +1,5 @@
-create database Sistema_apoyo_damnificados_terremoto_BD;
+CREATE DATABASE IF NOT EXISTS Sistema_apoyo_damnificados_terremoto_BD
+    DEFAULT CHARACTER SET utf8mb4;
 use Sistema_apoyo_damnificados_terremoto_BD;
 
 
@@ -29,6 +30,7 @@ CREATE TABLE damnificados (
     direccion_afectada VARCHAR(200),
     fecha_registro DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     id_albergue INT,
+    tipo_de_damnificacion varchar (100),
 
     UNIQUE (tipo_documento, numero_documento),
 

@@ -1,3 +1,112 @@
+.foto-afectacion {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: contain;
+  background-color: #edf2ee;
+}
+
+.canales-apoyo {
+  border-top: 1px solid #dce5df;
+  background-color: #edf2ee;
+}
+
+.canales-apoyo a:not(.btn) {
+  color: var(--verde-oscuro);
+}
+
+.dialogo-donacion {
+  width: min(34rem, calc(100% - 2rem));
+}
+
+.dialogo-donacion::backdrop {
+  background: rgb(0 0 0 / 45%);
+}
+
+.texto-aviso {
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+}
+
+.panel-admin:not([hidden]) {
+  display: grid;
+  grid-template-columns: minmax(14rem, 18rem) minmax(0, 1fr);
+  min-height: 100vh;
+}
+
+.barra-admin {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 1rem;
+  padding: 1.25rem;
+  background-color: var(--verde-oscuro);
+  color: var(--blanco);
+}
+
+.marca-admin,
+.opcion-admin {
+  display: flex;
+  align-items: center;
+  gap: .65rem;
+  color: var(--blanco);
+  text-decoration: none;
+}
+
+.marca-admin {
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #597569;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.menu-consultas {
+  display: grid;
+  gap: .25rem;
+}
+
+.opcion-admin {
+  padding: .65rem .8rem;
+  border-radius: .55rem;
+  line-height: 1.4;
+}
+
+.opcion-admin[aria-current="page"],
+.opcion-admin:hover {
+  background-color: var(--verde);
+}
+
+.marca-admin:hover,
+.opcion-admin:hover {
+  color: var(--blanco);
+  text-decoration: underline;
+}
+
+.barra-admin button {
+  align-self: flex-start;
+  margin-top: auto;
+}
+
+.barra-admin :focus-visible {
+  outline-color: var(--amarillo);
+}
+
+.contenido-admin {
+  width: min(100%, 68rem);
+  padding: clamp(1rem, 4vw, 3.5rem);
+}
+
+@media (max-width: 767px) {
+  .panel-admin:not([hidden]) {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+  }
+
+  .menu-consultas {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 /* Paleta inspirada en Pereira y Risaralda */
 :root {
   --verde: #176b45;
@@ -23,12 +132,26 @@ body {
 }
 
 .marca {
+  display: inline-flex;
+  align-items: center;
+  gap: .65rem;
   font-weight: bold;
   white-space: normal;
 }
 
-.marca i {
-  color: var(--amarillo);
+.escudos {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: .35rem;
+}
+
+.escudos img {
+  object-fit: contain;
+  padding: 2px;
+  border: 1px solid #dce5df;
+  border-radius: 6px;
+  background: var(--blanco);
 }
 
 .menu .nav-link {
@@ -41,8 +164,28 @@ body {
   text-decoration: underline;
 }
 
+.navegacion-inicio {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+}
+
+.navegacion-inicio .dropdown-item:active {
+  background-color: var(--verde);
+}
+
+@media (max-width: 767px) {
+  .navegacion-inicio {
+    flex-basis: 100%;
+  }
+}
+
 /* Presentación */
 .presentacion {
+  padding: 40px;
+  text-align: center;
+  border-radius: 16px;
   background-color: var(--blanco);
   border-top: 7px solid var(--rojo);
   border-bottom: 7px solid var(--amarillo);
@@ -50,16 +193,7 @@ body {
 }
 
 .presentacion h1 {
-  max-width: 900px;
-  margin-right: auto;
-  margin-left: auto;
   color: var(--verde-oscuro);
-}
-
-.descripcion {
-  max-width: 750px;
-  margin-right: auto;
-  margin-left: auto;
 }
 
 .etiqueta {
@@ -77,6 +211,71 @@ body {
   border: 1px solid #dce5df;
   border-radius: 16px;
   box-shadow: 0 5px 15px rgb(0 0 0 / 5%);
+}
+
+.titulo-interior {
+  color: var(--verde-oscuro);
+  font-weight: bold;
+}
+
+.tarjeta-formulario {
+  border-top: 5px solid var(--amarillo);
+}
+
+.tarjeta-formulario .form-control:focus,
+.tarjeta-formulario .form-select:focus {
+  border-color: var(--verde);
+  box-shadow: none;
+  outline: 2px solid var(--verde);
+  outline-offset: 2px;
+}
+
+.vista-acceso:not([hidden]) {
+  display: grid;
+  min-height: 100vh;
+  min-height: 100dvh;
+  place-items: center;
+  padding: 1rem;
+}
+
+.bloque-acceso {
+  width: min(100%, 26rem);
+}
+
+.tarjeta-acceso {
+  padding: clamp(1rem, 5vw, 2rem);
+}
+
+.campos-acceso .form-control {
+  border-color: #ccd8d0;
+}
+
+.campos-acceso .form-floating:first-child .form-control {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.campos-acceso .form-floating + .form-floating {
+  margin-top: -1px;
+}
+
+.campos-acceso .form-floating:last-child .form-control {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.campos-acceso .form-floating:focus-within {
+  z-index: 1;
+}
+
+.enlace-inicio {
+  display: inline-block;
+  margin: 1rem 0 0 .25rem;
+  color: var(--verde-oscuro);
+}
+
+.enlace-inicio:hover {
+  color: var(--verde);
 }
 
 .tarjeta h2,
@@ -168,13 +367,6 @@ button:focus-visible {
 /* Espacio alrededor de la presentación */
 .encabezado {
   padding: 40px 0;
-}
-
-/* Recuadro principal */
-.presentacion {
-  padding: 40px;
-  text-align: center;
-  border-radius: 16px;
 }
 
 /* Título principal */

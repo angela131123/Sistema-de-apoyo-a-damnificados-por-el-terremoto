@@ -8,12 +8,10 @@
       content="Sistema de apoyo para personas damnificadas por el terremoto."
     />
     <title>Sistema de apoyo para damnificados del terremoto</title>
-    <!-- Iconos de Bootstrap -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
-    <!-- Iconos -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
       rel="stylesheet"
@@ -22,28 +20,28 @@
   </head>
 
   <body id="inicio">
-    <!-- Menú de navegación -->
-    <nav class="navbar navbar-expand-lg navbar-dark menu">
-      <div class="container px-lg-5">
+    <nav class="navbar navbar-dark menu" aria-label="Navegación principal">
+      <div class="container px-lg-5 gap-2">
         <a class="navbar-brand marca" href="#inicio">
-          <i class="bi bi-heart-fill me-2" aria-hidden="true"></i>
+          <span class="escudos">
+            <img
+              src="./img/escudopereira.webp"
+              alt="Escudo de Pereira"
+              width="32"
+              height="32"
+            />
+            <img
+              src="./img/escudorisaralda.jpeg"
+              alt="Escudo de Risaralda"
+              width="32"
+              height="32"
+            />
+          </span>
           Apoyo a damnificados
         </a>
 
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#menuPrincipal"
-          aria-controls="menuPrincipal"
-          aria-expanded="false"
-          aria-label="Abrir o cerrar menú"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="menuPrincipal">
-          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <div class="navegacion-inicio">
+          <ul class="navbar-nav flex-row align-items-center gap-2 gap-sm-3">
             <li class="nav-item">
               <a class="nav-link" href="#inicio">Inicio</a>
             </li>
@@ -51,18 +49,50 @@
               <a class="nav-link" href="#nosotros">Nosotros</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#ayudas">Ayudas</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="./registro.html">Registrarse</a>
+              <a class="nav-link" href="./administrador.html"
+                >Ingresar como administrador</a
+              >
             </li>
           </ul>
+          <div class="dropdown">
+            <button
+              class="navbar-toggler"
+              id="boton-menu-inicio"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+              aria-controls="menu-inicio"
+              aria-label="Más opciones"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <ul
+              class="dropdown-menu dropdown-menu-end"
+              id="menu-inicio"
+              aria-labelledby="boton-menu-inicio"
+            >
+              <li><a class="dropdown-item" href="#ayudas">Ayudas</a></li>
+              <li>
+                <a class="dropdown-item" href="#canales-de-apoyo"
+                  >Albergues y donaciones</a
+                >
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+              <li>
+                <a class="dropdown-item" href="./formulario.html"
+                  >Registrarse</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" href="./donaciones.html">Donación</a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </nav>
 
     <main>
-      <!-- Presentación -->
       <header class="encabezado">
         <div class="container">
           <div class="presentacion">
@@ -73,12 +103,10 @@
             </h1>
 
             <p class="descripcion">
-              Un espacio para registrar las necesidades de las personas
-              afectadas y facilitar la organización de ayudas. Juntos podemos
-              contribuir a la recuperación de nuestra comunidad.
+              Registra tus necesidades si te afectó el terremoto en Pereira o
+              consulta cómo ofrecer ayuda.
             </p>
 
-            <!-- Carrusel de Bootstrap -->
             <div
               id="carruselAyudas"
               class="carousel slide carrusel"
@@ -86,7 +114,6 @@
               role="region"
               aria-label="Fotografías de apoyo a la comunidad"
             >
-              <!-- Indicadores de las imágenes -->
               <div class="carousel-indicators">
                 <button
                   type="button"
@@ -112,7 +139,6 @@
                 ></button>
               </div>
 
-              <!-- Imágenes -->
               <div class="carousel-inner">
                 <div class="carousel-item active">
                   <img
@@ -139,7 +165,6 @@
                 </div>
               </div>
 
-              <!-- Flecha anterior -->
               <button
                 class="carousel-control-prev"
                 type="button"
@@ -153,7 +178,6 @@
                 <span class="visually-hidden">Imagen anterior</span>
               </button>
 
-              <!-- Flecha siguiente -->
               <button
                 class="carousel-control-next"
                 type="button"
@@ -168,14 +192,13 @@
               </button>
             </div>
 
-            <a class="btn boton-principal" href="./registro.html">
+            <a class="btn boton-principal" href="./formulario.html">
               Registrar mis datos
             </a>
           </div>
         </div>
       </header>
 
-      <!-- Misión, visión y registro -->
       <section class="pb-4" id="nosotros" aria-label="Acerca del sistema">
         <div class="container px-lg-5">
           <div class="row g-4">
@@ -189,9 +212,8 @@
                   <h2 class="fs-4 fw-bold">Misión</h2>
 
                   <p class="mb-0">
-                    Apoyar a las personas damnificadas mediante el registro de
-                    sus necesidades y la organización de recursos, facilitando
-                    una atención solidaria y oportuna.
+                    Registrar las necesidades de las personas afectadas y
+                    organizar la ayuda.
                   </p>
                 </div>
               </article>
@@ -207,9 +229,8 @@
                   <h2 class="fs-4 fw-bold">Visión</h2>
 
                   <p class="mb-0">
-                    Ser una herramienta de apoyo para la comunidad, conectando
-                    las necesidades de las personas afectadas con las ayudas
-                    disponibles y contribuyendo a su recuperación.
+                    Ayudar a que los recursos lleguen a quienes más los
+                    necesitan.
                   </p>
                 </div>
               </article>
@@ -224,15 +245,7 @@
 
                   <h2 class="fs-4 fw-bold">Registro de damnificados</h2>
 
-                  <p>
-                    Si has sido afectado por el terremoto, registra tus datos y
-                    describe tus necesidades para facilitar la gestión de las
-                    solicitudes de apoyo.
-                  </p>
-
-                  <a class="btn boton-principal" href="./registro.html">
-                    Registrar
-                  </a>
+                  <p class="mb-0">Indica qué necesitas y cómo contactarte.</p>
                 </div>
               </article>
             </div>
@@ -240,7 +253,6 @@
         </div>
       </section>
 
-      <!-- Información sobre las ayudas -->
       <section class="py-5" id="ayudas" aria-labelledby="titulo-ayudas">
         <div class="container px-lg-5">
           <h2 class="text-center fw-bold mb-4" id="titulo-ayudas">
@@ -258,14 +270,12 @@
                   <h3 class="fs-4 fw-bold">Registro de necesidades</h3>
 
                   <p class="mb-0">
-                    Permite identificar las necesidades de alimentación, agua,
-                    ropa y otros recursos para organizar las solicitudes según
-                    su prioridad.
+                    Solicita alimentos, agua, ropa u otros recursos e indica la
+                    prioridad.
                   </p>
                 </div>
               </article>
             </div>
-
             <div class="col-12 col-md-4">
               <article class="card tarjeta h-100">
                 <div class="card-body text-center p-4">
@@ -275,28 +285,19 @@
 
                   <h3 class="fs-4 fw-bold">Gestión de donaciones</h3>
 
-                  <p class="mb-0">
-                    Facilita el registro de los recursos recibidos de personas y
-                    organizaciones, así como el seguimiento de las ayudas
-                    entregadas a los damnificados.
-                  </p>
+                  <p class="mb-0">Ofrece recursos para coordinar su entrega.</p>
                 </div>
               </article>
             </div>
-
             <div class="col-12 col-md-4">
               <article class="card tarjeta h-100">
                 <div class="card-body text-center p-4">
                   <div class="icono icono-verde mb-4">
                     <i class="bi bi-house" aria-hidden="true"></i>
                   </div>
-
                   <h3 class="fs-4 fw-bold">Información de albergues</h3>
-
                   <p class="mb-0">
-                    Organiza la información sobre los lugares de alojamiento
-                    temporal, su ubicación y capacidad para apoyar la asignación
-                    de las personas que necesitan refugio.
+                    Consulta con la Alcaldía dónde hay alojamiento temporal.
                   </p>
                 </div>
               </article>
@@ -304,21 +305,99 @@
           </div>
         </div>
       </section>
+      <section
+        class="py-5 canales-apoyo"
+        id="canales-de-apoyo"
+        aria-labelledby="titulo-canales"
+      >
+        <div class="container px-lg-5">
+          <h2 class="titulo-interior mb-4" id="titulo-canales">
+            Albergues y donaciones en Pereira
+          </h2>
+          <div class="row g-4">
+            <div class="col-12 col-lg-6">
+              <article
+                class="tarjeta tarjeta-formulario h-100 p-4"
+                id="albergues"
+              >
+                <div class="icono icono-verde mb-3">
+                  <i class="bi bi-house" aria-hidden="true"></i>
+                </div>
+                <h3 class="h4 fw-bold">¿Necesitas un albergue?</h3>
+                <p>
+                  Llama a la Alcaldía y pregunta por la DIGER. Indica tu barrio,
+                  cuántas personas necesitan alojamiento y si requieren
+                  asistencia especial.
+                </p>
+                <a class="btn boton-principal mb-3" href="tel:+576063248000"
+                  >Alcaldía · (606) 324 8000</a
+                >
+                <p>
+                  Ante una emergencia, llama al <a href="tel:123">123</a> o al
+                  <a href="tel:119">119</a>.
+                </p>
+                <p>Confirma el punto y el cupo antes de desplazarte.</p>
+              </article>
+            </div>
+            <div class="col-12 col-lg-6">
+              <article class="tarjeta tarjeta-formulario h-100 p-4" id="donar">
+                <div class="icono icono-rojo mb-3">
+                  <i class="bi bi-gift" aria-hidden="true"></i>
+                </div>
+                <h3 class="h4 fw-bold">¿Quieres donar?</h3>
+                <a class="btn boton-principal mb-3" href="./donaciones.html"
+                  >Ofrecer una donación</a
+                >
+                <p>
+                  <strong>En especie.</strong> Llama al
+                  <a href="tel:+576063248000">(606) 324 8000</a> para confirmar
+                  el punto de acopio, el horario y qué artículos reciben.
+                </p>
+                <p>
+                  <strong>En dinero.</strong> Consulta los medios de pago en el
+                  <a href="https://www.cruzrojacolombiana.org/"
+                    >sitio oficial de la Cruz Roja Colombiana</a
+                  >.
+                </p>
+              </article>
+            </div>
+          </div>
+          <p class="mt-3 mb-0 small text-muted">
+            <a
+              href="https://www.pereira.gov.co/publicaciones/6901/direccion-de-gestion-del-riesgo-de-pereira-diger/"
+              >Dirección de Gestión del Riesgo de Pereira</a
+            >
+            ·
+            <a
+              href="https://www.pereira.gov.co/publicaciones/10847/diger-pereira-atiende-emergencias-generadas-por-las-lluvias-de-las-ultimas-horas/"
+              >Líneas de emergencia</a
+            >.
+          </p>
+        </div>
+      </section>
     </main>
-
-    <!-- Pie de página -->
     <footer class="pie-pagina py-4">
       <div class="container text-center">
+        <span class="escudos mb-2">
+          <img
+            src="./img/escudopereira.webp"
+            alt="Escudo de Pereira"
+            width="32"
+            height="32"
+          />
+          <img
+            src="./img/escudorisaralda.jpeg"
+            alt="Escudo de Risaralda"
+            width="32"
+            height="32"
+          />
+        </span>
         <p class="fw-bold mb-2">
           Sistema de apoyo para damnificados del terremoto
         </p>
-        <p class="mb-0">
-          Pereira, Risaralda · Solidaridad y apoyo para nuestra comunidad
-        </p>
+        <p class="mb-0">Proyecto académico · Pereira, Risaralda</p>
       </div>
     </footer>
-
-    <!-- Bootstrap: permite abrir el menú en celulares -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
