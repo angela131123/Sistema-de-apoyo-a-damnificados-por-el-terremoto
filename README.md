@@ -1,6 +1,6 @@
 # Sistema de apoyo a damnificados
 
-Proyecto académico de Programación IV y Calidad del Desarrollo de Software, presentado por Angela Maria Taba Bueno. El sistema registra las necesidades de las personas afectadas por un terremoto en Pereira y organiza la distribución de la ayuda.
+Proyecto académico de Programación IV y Calidad del Desarrollo de Software, presentado por Angela Maria Taba Bueno, Madelyn Andrea Restrepo y Isabella Rivera. El sistema registra las necesidades de las personas afectadas por un terremoto en Pereira y organiza la distribución de la ayuda.
 
 ## Instalación local
 
