@@ -2,14 +2,16 @@
   "name": "apoyo-damnificados",
   "version": "1.0.0",
   "private": true,
+  "engines": {
+    "node": ">=22.13.0"
+  },
   "scripts": {
-    "start": "node js/main.js",
-    "crear-admin": "node js/main.js crear-admin"
+    "start": "node --env-file-if-exists=.env js/main.js",
+    "crear-admin": "node --env-file-if-exists=.env js/main.js crear-admin"
   },
   "dependencies": {
     "express": "^5.1.0",
     "express-session": "^1.18.1",
-    "mysql2": "^3.14.0",
     "multer": "^2.1.1"
   }
 }

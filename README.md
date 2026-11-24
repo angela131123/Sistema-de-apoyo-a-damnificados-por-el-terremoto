@@ -4,25 +4,18 @@ Proyecto académico de Programación IV y Calidad del Desarrollo de Software, pr
 
 ## Instalación local
 
-1. Inicia **MySQL** en XAMPP. Para usar phpMyAdmin, inicia también **Apache** y abre `http://localhost/phpmyadmin`.
-2. Si la base es nueva, importa `basedatos/sistema de geztion de damnificados.sql`. Luego importa `basedatos/acceso_administrador.sql` para crear las tablas adicionales y cargar el catálogo. Si ya tienes la base, importa solo `basedatos/acceso_administrador.sql` para aplicar los cambios conservando los registros.
-3. Con Node.js 22 o posterior, abre PowerShell en la carpeta del proyecto y ejecuta `npm.cmd ci`.
-4. Si necesitas acceso al panel, crea una cuenta de administrador.
+Abre PowerShell en la carpeta del proyecto con Node.js 22.13 o posterior.
 
-   ```powershell
-   $claveAdministrador = Read-Host 'Contraseña de administrador (mínimo 12 caracteres)' -AsSecureString
-   $env:ADMIN_PASSWORD = [pscredential]::new('administrador', $claveAdministrador).GetNetworkCredential().Password
-   try {
-       npm.cmd run crear-admin -- administrador
-   } finally {
-       Remove-Item Env:ADMIN_PASSWORD
-       $claveAdministrador.Dispose()
-   }
-   ```
+```powershell
+npm.cmd ci
+npm.cmd start
+```
 
-5. Ejecuta `npm.cmd start` y abre `http://127.0.0.1:3000/`.
+Abre [el sitio local](http://127.0.0.1:3000/). El primer arranque crea `basedatos/damnificados.sqlite` y carga el catálogo inicial.
 
-MySQL usa por defecto `127.0.0.1:3307`, usuario `root` y contraseña vacía. Si XAMPP usa el puerto 3306, ejecuta `$env:DB_PORT = '3306'` antes de crear la cuenta o iniciar el servidor. Para cambiar el host o las credenciales, usa `DB_HOST`, `DB_USER` o `DB_PASSWORD`.
+En `.env`, `PORT` indica el puerto del sitio y `DB_FILE` indica dónde se guarda la base. Si falta `.env`, puedes copiar `.env.example` con `Copy-Item .env.example .env`.
+
+Para crear una cuenta del panel, escribe tu clave de 12 a 128 caracteres entre comillas en `ADMIN_PASSWORD` en `.env` y quita el `#` de esa línea. Ejecuta `npm.cmd run crear-admin -- administrador` y, cuando se cree la cuenta, borra la clave de `.env`. La base guarda el hash de la contraseña.
 
 ## Uso
 
@@ -36,7 +29,7 @@ MySQL usa por defecto `127.0.0.1:3307`, usuario `root` y contraseña vacía. Si 
 
 ## Base de datos
 
-Los dos scripts SQL definen el esquema de la aplicación. `basedatos/modeloentidadrelacion.mwb` conserva el modelo inicial de Workbench. Las siguientes relaciones incluyen las tablas que usa el sistema actual.
+`basedatos/esquema.sql` es el único esquema. Define las tablas de SQLite y carga el catálogo inicial. Si tienes datos en una base anterior de MySQL, requieren una migración aparte.
 
 ```mermaid
 erDiagram

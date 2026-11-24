@@ -1,2 +1,4 @@
 node_modules/
-*.mwb.bak
+.env
+*.sqlite
+*.sqlite-*

@@ -18,7 +18,7 @@ recepción de donaciones, las entregas, los albergues y los casos.
 
 2. ARQUITECTURA Y TECNOLOGÍAS
 
-Navegador (HTML, CSS y JavaScript) → API HTTP (Node.js y Express) → MySQL/MariaDB
+Navegador (HTML, CSS y JavaScript) → API HTTP (Node.js y Express) → SQLite
 
 - HTML estructura las páginas y los formularios. CSS y Bootstrap 5.2.3 dan
   estilo a la interfaz y la adaptan a pantallas de distintos tamaños. Bootstrap
@@ -28,8 +28,7 @@ Navegador (HTML, CSS y JavaScript) → API HTTP (Node.js y Express) → MySQL/Ma
   actualizar los formularios, fichas y tablas.
 - Node.js ejecuta el servidor. Express sirve las páginas y los recursos
   públicos y recibe las solicitudes en las rutas que empiezan por /api/.
-- mysql2 conecta el servidor con MySQL o MariaDB mediante un conjunto de
-  conexiones reutilizables y consultas parametrizadas para los datos de entrada.
+- node:sqlite abre el archivo local y ejecuta las consultas parametrizadas.
 - express-session mantiene la sesión. Multer recibe las fotos del formulario.
   El módulo node:crypto genera valores aleatorios y procesa las contraseñas.
 - package.json define las dependencias y comandos de arranque. package-lock.json
@@ -61,10 +60,11 @@ css/styles.css — Estilos compartidos de navegación, botones, formularios,
 
 4. ARCHIVOS JAVASCRIPT
 
-js/main.js — Punto de entrada del servidor. Configura Express, la conexión a
-  la base de datos y las sesiones. Sirve los HTML y los recursos públicos,
+js/main.js — Punto de entrada del servidor. Configura Express y las sesiones. Sirve los HTML y los recursos públicos,
   valida las solicitudes, ejecuta las operaciones de base de datos y envía
   las respuestas. También ejecuta el comando para crear cuentas administradoras.
+
+js/base-datos.js — Abre SQLite, aplica el esquema y ejecuta las transacciones.
 
 js/recursos.js — Función compartida que lee el catálogo desde /api/recursos
   y llena los selectores con el nombre y la unidad de medida de cada recurso.
@@ -84,16 +84,9 @@ js/administrador.js — Controla el inicio y cierre de sesión y carga las ficha
 
 5. BASE DE DATOS
 
-Nombre de la base — Sistema_apoyo_damnificados_terremoto_BD
-
-- basedatos/sistema de geztion de damnificados.sql crea la base y las tablas
-  principales. Se importa al preparar una base nueva.
-- basedatos/acceso_administrador.sql agrega las tablas complementarias y
-  carga ocho recursos iniciales. Puede volver a importarse para aplicar la
-  ampliación a una base existente conservando sus registros.
-- basedatos/modeloentidadrelacion.mwb conserva el modelo inicial de MySQL
-  Workbench. Los dos scripts SQL definen el esquema actual y el README.md
-  contiene el diagrama de relaciones actualizado.
+- basedatos/esquema.sql contiene todas las tablas y el catálogo inicial.
+- basedatos/damnificados.sqlite es el archivo que se crea al arrancar. La ruta
+  se configura con DB_FILE en .env.
 
 Tablas principales
 
@@ -113,15 +106,13 @@ Tablas principales
     recepción, observaciones y, cuando corresponde, el donante.
   entregas — Salidas de inventario. Registra a quién se entregó el recurso,
     qué cantidad recibió, cuándo y qué administrador registró la entrega.
-  Administrador — Tabla del modelo inicial para datos del colaborador. El
-    inicio de sesión usa cuentas_administrador.
 
 Tablas complementarias
 
   cuentas_administrador — Usuario único y hash de la contraseña.
   reportes_afectacion — Descripción ampliada de la afectación, cuando se aporta.
   fotos_damnificados — Fotos asociadas a una ficha. Guarda el tipo de imagen
-    y el archivo como dato binario en una columna MEDIUMBLOB.
+    y el archivo como dato binario en una columna BLOB.
   seguimiento_damnificados — Estado de contacto o revisión y motivo, cuando
     corresponde. Puede quedar Pendiente, No se pudo contactar o No cumple.
   avisos_whatsapp — Fecha en la que un administrador confirmó manualmente
@@ -134,10 +125,10 @@ Tablas complementarias
     Su clave de solicitud única permite reconocer reintentos.
 
 Las claves primarias identifican las filas y las claves foráneas mantienen
-las relaciones entre tablas. Las cantidades de recursos se guardan como
-decimales de dos posiciones. Cuando una operación abarca varias escrituras,
+las relaciones entre tablas. Las cantidades de recursos admiten hasta dos
+decimales. Cuando una operación abarca varias escrituras,
 el servidor usa una transacción para guardar todo junto o deshacer los cambios
-si hay un error. Las asignaciones y las entregas usan bloqueos al verificar
+si hay un error. SQLite serializa las escrituras mientras el servidor valida
 cupos y existencias para controlar solicitudes simultáneas.
 
 6. API UTILIZADA
@@ -214,26 +205,10 @@ Alcaldía y la Cruz Roja se ofrecen como enlaces informativos.
 
 8. EJECUCIÓN LOCAL Y REVISIÓN
 
-1. Iniciar MySQL en XAMPP. Para utilizar phpMyAdmin, iniciar Apache y abrir
-   http://localhost/phpmyadmin.
-2. En una instalación nueva, importar primero el SQL principal y después
-   acceso_administrador.sql. Si la base ya existe, aplicar el segundo script.
-3. En PowerShell, con Node.js 22 o posterior y desde la carpeta del proyecto,
-   ejecutar npm.cmd ci.
-4. Para acceder al panel, configurar temporalmente la variable ADMIN_PASSWORD
-   con una clave de 12 a 128 caracteres y ejecutar
-   npm.cmd run crear-admin -- administrador. El README explica cómo leerla
-   sin mostrarla en la consola y quitar la variable al terminar.
-5. Ejecutar npm.cmd start y abrir http://127.0.0.1:3000/.
+1. Con Node.js 22.13 o posterior, ejecuta npm.cmd ci en PowerShell.
+2. Ejecuta npm.cmd start y abre http://127.0.0.1:3000/.
+3. Para acceder al panel, sigue las instrucciones del README para crear una
+   cuenta administradora.
 
-Por defecto, el servidor de base de datos se busca en 127.0.0.1:3307. Si
-XAMPP usa el puerto 3306, ejecutar $env:DB_PORT = '3306' antes de crear la
-cuenta o arrancar Node.js. DB_HOST, DB_USER y DB_PASSWORD permiten indicar
-los parámetros de conexión. Las sesiones se mantienen en la memoria del
-servidor durante la ejecución local y se pierden al reiniciarlo.
-
-En la verificación con una base MariaDB temporal se probaron la instalación,
-los registros con fotos, el acceso administrativo, las donaciones y las
-entregas. También se comprobaron solicitudes simultáneas para un mismo cupo
-y para el mismo inventario. El formulario de asignación se comprobó con una
-lista de albergues disponible, vacía y omitida por el servidor.
+El archivo .env contiene el puerto del sitio y la ruta de SQLite. Las
+sesiones se mantienen en memoria durante la ejecución del servidor.
